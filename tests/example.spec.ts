@@ -9,9 +9,14 @@ const baseUrl = 'https://www.saucedemo.com/';
 const standartUser = 'standard_user';
 const pass = 'secret_sauce';
 
+const logo = 'Swag Labs'
+const badge = '1'
+
 const addressFirstName = '4iki';
 const addressLastName = 'Riki';
 const addressZip = '1234';
+
+const completeOrderHeaderText = 'Thank you for your order!'
 
 test.beforeEach (async ({page}) => {
   await page.goto(baseUrl)
@@ -27,7 +32,7 @@ test('log into page', async ({ page }) => {
   const actions = new Actions(page);
 
   await actions.logIn(standartUser, pass);
-  await actions.assertLogoText('Swag Labs');
+  await actions.assertLogoText(logo);
   
 });
 
@@ -36,7 +41,7 @@ test('add item to cart', async ({page}) => {
   const actions = new Actions(page);
   await actions.logIn(standartUser, pass);
   await actions.clickAddToCart();
-  await actions.assertCartBadge('1');
+  await actions.assertCartBadge(badge);
   
   
 } );
@@ -50,6 +55,6 @@ test('finalize an order', async({page}) => {
   await actions.addAddress(addressFirstName,addressLastName,addressZip);
   await actions.clickContinueOrder();
   await actions.finnishButton();
-  await actions.assertOrderComplete('Thank you for your order!');
+  await actions.assertOrderComplete(completeOrderHeaderText);
 
 })
