@@ -13,6 +13,10 @@ test.beforeEach (async ({page}) => {
   await page.goto(baseUrl)
 })
 
+test.afterEach(async ({ page }) => {
+  console.log('Test completed');
+});
+
 test('log into page', async ({ page }) => {
   
 
