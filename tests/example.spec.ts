@@ -6,6 +6,8 @@ let actions: Actions;
 
 
 const baseUrl = 'https://www.saucedemo.com/';
+const standartUser = 'standard_user';
+const pass = 'secret_sauce';
 
 test.beforeEach (async ({page}) => {
   await page.goto(baseUrl)
@@ -13,8 +15,6 @@ test.beforeEach (async ({page}) => {
 
 test('log into page', async ({ page }) => {
   
-  const standartUser = 'standard_user';
-  const pass = 'secret_sauce';
 
   const actions = new Actions(page);
 
@@ -22,6 +22,16 @@ test('log into page', async ({ page }) => {
   await actions.assertLogoText('Swag Labs');
   
 });
+
+test('add item to cart', async ({page}) => {
+
+  const actions = new Actions(page);
+  await actions.logIn(standartUser, pass);
+  await actions.clickAddToCart();
+  await actions.assertCartBadge('1');
+  
+  
+} )
 
 // test('get started link', async ({ page }) => {
 //   await page.goto('https://playwright.dev/');

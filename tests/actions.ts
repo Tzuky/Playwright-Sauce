@@ -28,5 +28,20 @@ export class Actions {
 
     }
 
+    async clickAddToCart() {
+        await this.page.locator(locators.jacketAddToCartButtons).click()
+    }
+
+    async getCartBadge() {
+        return await this.page.locator(locators.shoppingCartBadge).textContent()
+    }
+
+    async assertCartBadge(expectedBadge: string) {
+        const cartBadge = await this.getCartBadge();
+        if (cartBadge !== expectedBadge) {
+            throw new Error('Badge is incorrect - Item not added to Cart')
+        }
+    }
+
     
 }
