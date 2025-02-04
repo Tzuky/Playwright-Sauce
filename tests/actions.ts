@@ -16,6 +16,13 @@ export class Actions {
 
     }
 
+    async addAddress(firstName: string, lastName: string, zip: string) {
+    await this.page.locator(locators.firstNameField).fill(firstName)
+    await this.page.locator(locators.lastNameField).fill(lastName)
+    await this.page.locator(locators.zipCode).fill(zip)
+
+    }
+
     async getLogoText() {
         return await this.page.locator(locators.logo).textContent()
     }
@@ -42,6 +49,41 @@ export class Actions {
             throw new Error('Badge is incorrect - Item not added to Cart')
         }
     }
+
+    async clickOnCart() {
+        await this.page.locator(locators.shoppingCartContainer).click()
+    }
+
+    async clickCheckout() {
+        await this.page.locator(locators.checkoutButton).click()
+    }
+
+    async clickContinueOrder() {
+        await this.page.locator(locators.continueCheckoutButton).click()
+    }
+
+    async continueButton() {
+        await this.page.locator(locators.continueCheckoutButton).click()
+    }
+
+    async finnishButton() {
+        await this.page.locator(locators.orderFinnishButton).click()
+    }
+
+    async getCompleteOrderText() {
+        return await this.page.locator(locators.completeOrderText).textContent()
+    }
+
+    async assertOrderComplete(expectHeaderText: string) {
+        const headerText = await this.getCompleteOrderText();
+        if (headerText !== expectHeaderText) {
+            throw new Error ('Order Not Completed')
+        }
+    }
+
+    
+
+
 
     
 }

@@ -9,6 +9,10 @@ const baseUrl = 'https://www.saucedemo.com/';
 const standartUser = 'standard_user';
 const pass = 'secret_sauce';
 
+const addressFirstName = '4iki';
+const addressLastName = 'Riki';
+const addressZip = '1234';
+
 test.beforeEach (async ({page}) => {
   await page.goto(baseUrl)
 })
@@ -35,14 +39,17 @@ test('add item to cart', async ({page}) => {
   await actions.assertCartBadge('1');
   
   
-} )
+} );
 
-// test('get started link', async ({ page }) => {
-//   await page.goto('https://playwright.dev/');
+test('finalize an order', async({page}) => {
+  const actions = new Actions(page);
+  await actions.logIn(standartUser, pass);
+  await actions.clickAddToCart();
+  await actions.clickOnCart();
+  await actions.clickCheckout();
+  await actions.addAddress(addressFirstName,addressLastName,addressZip);
+  await actions.clickContinueOrder();
+  await actions.finnishButton();
+  await actions.assertOrderComplete('Thank you for your order!');
 
-//   // Click the get started link.
-//   await page.getByRole('link', { name: 'Get started' }).click();
-
-//   // Expects page to have a heading with the name of Installation.
-//   await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
-// });
+})
