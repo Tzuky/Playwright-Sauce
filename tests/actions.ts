@@ -113,9 +113,9 @@ export class Actions {
         try {
             // Verify if prices are sorted correctly
             expect(numericPrices).toEqual(sortedPrices);
-            console.log("✅ Price sorting verification passed.");
+            console.log("Price sorting verification passed.");
         } catch (error) {
-            console.error("❌ Price sorting verification failed. Prices are not sorted correctly.");
+            console.error("Price sorting verification failed. Prices are not sorted correctly.");
             console.error("Extracted Prices:", numericPrices);
             console.error("Expected Sorted Prices:", sortedPrices);
             throw error; // Re-throw the error so the test fails
