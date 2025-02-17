@@ -31,8 +31,9 @@ export class Actions {
     async assertLogoText(expectedText: string) {
         const logoText = await this.getLogoText();
         if (logoText !== expectedText) {
-            throw new Error('Logo text incorrect');
+            throw new Error('Logo Text Incorrect');
         }
+        else console.log('Logo Correct')
 
     }
 
@@ -49,6 +50,7 @@ export class Actions {
         if (cartBadge !== expectedBadge) {
             throw new Error('Badge is incorrect - Item not added to Cart')
         }
+        else console.log('Badge Correct')
     }
 
     async clickOnCart() {
@@ -80,6 +82,7 @@ export class Actions {
         if (headerText !== expectHeaderText) {
             throw new Error ('Order Not Completed')
         }
+        else console.log('Order Complete Successfully')
     }
 
 
@@ -90,8 +93,9 @@ export class Actions {
     async lockedUserLoginError(expectedText: string) {
         const errorText = await this.getErrorText();
         if (errorText !== expectedText) {
-            throw new Error('Logo text incorrect');
+            throw new Error('Error text incorrect');
         }
+        else console.log('Error Text Correct')
 
     }
 
