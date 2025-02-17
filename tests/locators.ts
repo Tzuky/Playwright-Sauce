@@ -17,7 +17,9 @@ export const locators = {
     continueCheckoutButton: '#continue',
     orderFinnishButton: '#finish',
     completeOrderText: '[data-test="complete-header"]',
-    lockedOutText: '[data-test="error"]'
+    lockedOutText: '[data-test="error"]',
+    sortContainer: '[data-test="product-sort-container"]',
+    itemsAndPrices: '[data-test="inventory-item-price"]'
     
 
 }

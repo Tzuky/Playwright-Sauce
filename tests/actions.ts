@@ -1,5 +1,6 @@
 import { Page } from '@playwright/test';
 import { locators } from './locators';
+import { expect } from '@playwright/test';
 
 export class Actions {
     private page: Page;
@@ -94,9 +95,42 @@ export class Actions {
 
     }
 
-    
+    async sortItemsLohi() {
+        await this.page.selectOption(locators.sortContainer, 'lohi');
+    }
 
+    async getItemsAndPrices() {
+        return await this.page.locator(locators.itemsAndPrices).allTextContents();
+    }
 
+    async assertPriceSorting() {
+        const pricesText = await this.getItemsAndPrices();
+        
+        // Extract numeric values from price strings
+        const numericPrices = pricesText.map(price => parseFloat(price.replace('$', '')));
+        const sortedPrices = [...numericPrices].sort((a, b) => a - b);
 
-    
+        try {
+            // Verify if prices are sorted correctly
+            expect(numericPrices).toEqual(sortedPrices);
+            console.log("✅ Price sorting verification passed.");
+        } catch (error) {
+            console.error("❌ Price sorting verification failed. Prices are not sorted correctly.");
+            console.error("Extracted Prices:", numericPrices);
+            console.error("Expected Sorted Prices:", sortedPrices);
+            throw error; // Re-throw the error so the test fails
+        }
+    }
 }
+
+
+
+    
+
+    
+
+    
+
+
+
+    

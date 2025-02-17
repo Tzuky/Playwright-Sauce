@@ -2,6 +2,8 @@ import { test, expect } from '@playwright/test';
 import { beforeEach } from 'node:test';
 import { Actions } from './actions';
 
+
+
 let actions: Actions;
 
 
@@ -70,3 +72,12 @@ test('locked out user', async ({ page }) => {
   await actions.lockedUserLoginError(lockedError);
   
 });
+
+test('sort Low to High', async ({page}) =>{
+
+  const actions = new Actions(page);
+  await actions.logIn(standartUser,pass);
+  await actions.sortItemsLohi();
+  await actions.assertPriceSorting();
+  
+} )
