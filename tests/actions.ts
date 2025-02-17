@@ -81,6 +81,19 @@ export class Actions {
         }
     }
 
+
+    async getErrorText() {
+        return await this.page.locator(locators.lockedOutText).textContent()
+    }
+
+    async lockedUserLoginError(expectedText: string) {
+        const errorText = await this.getErrorText();
+        if (errorText !== expectedText) {
+            throw new Error('Logo text incorrect');
+        }
+
+    }
+
     
 
 

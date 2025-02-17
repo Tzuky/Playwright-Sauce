@@ -7,6 +7,7 @@ let actions: Actions;
 
 const baseUrl = 'https://www.saucedemo.com/';
 const standartUser = 'standard_user';
+const lockedOutUser = 'locked_out_user';
 const pass = 'secret_sauce';
 
 const logo = 'Swag Labs'
@@ -16,7 +17,8 @@ const addressFirstName = '4iki';
 const addressLastName = 'Riki';
 const addressZip = '1234';
 
-const completeOrderHeaderText = 'Thank you for your order!'
+const completeOrderHeaderText = 'Thank you for your order!';
+const lockedError = 'Epic sadface: Sorry, this user has been locked out.';
 
 test.beforeEach (async ({page}) => {
   await page.goto(baseUrl)
@@ -58,3 +60,13 @@ test('finalize an order', async({page}) => {
   await actions.assertOrderComplete(completeOrderHeaderText);
 
 })
+
+test('locked out user', async ({ page }) => {
+  
+
+  const actions = new Actions(page);
+
+  await actions.logIn(lockedOutUser, pass);
+  await actions.lockedUserLoginError(lockedError);
+  
+});
