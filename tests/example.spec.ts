@@ -78,6 +78,15 @@ test('sort Low to High', async ({page}) =>{
   const actions = new Actions(page);
   await actions.logIn(standartUser,pass);
   await actions.sortItemsLohi();
-  await actions.assertPriceSorting();
+  await actions.assertPriceSorting('asc');
+  
+} )
+
+test('sort High to Low', async ({page}) =>{ 
+
+  const actions = new Actions(page);
+  await actions.logIn(standartUser,pass);
+  await actions.sortItemsHilo();
+  await actions.assertPriceSorting('desc');
   
 } )

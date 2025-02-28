@@ -103,23 +103,27 @@ export class Actions {
         await this.page.selectOption(locators.sortContainer, 'lohi');
     }
 
+    async sortItemsHilo() {
+        await this.page.selectOption(locators.sortContainer, 'hilo');
+    }
+
     async getItemsAndPrices() {
         return await this.page.locator(locators.itemsAndPrices).allTextContents();
     }
 
-    async assertPriceSorting() {
+    async assertPriceSorting(order: 'asc' | 'desc') {
         const pricesText = await this.getItemsAndPrices();
         
         // Extract numeric values from price strings
         const numericPrices = pricesText.map(price => parseFloat(price.replace('$', '')));
-        const sortedPrices = [...numericPrices].sort((a, b) => a - b);
+        const sortedPrices = [...numericPrices].sort((a, b) => order === 'asc' ? a - b : b - a);
 
         try {
             // Verify if prices are sorted correctly
             expect(numericPrices).toEqual(sortedPrices);
-            console.log("Price sorting verification passed.");
+            console.log(`Price sorting verification passed for order: ${order}.`);
         } catch (error) {
-            console.error("Price sorting verification failed. Prices are not sorted correctly.");
+            console.error(`Price sorting verification failed for order: ${order}. Prices are not sorted correctly.`);
             console.error("Extracted Prices:", numericPrices);
             console.error("Expected Sorted Prices:", sortedPrices);
             throw error; // Re-throw the error so the test fails
