@@ -107,6 +107,14 @@ export class Actions {
         await this.page.selectOption(locators.sortContainer, 'hilo');
     }
 
+    async sortItemsAtoZ() {
+        await this.page.selectOption(locators.sortContainer, 'az');
+    }
+
+    async sortItemsZtoA() {
+        await this.page.selectOption(locators.sortContainer, 'za');
+    }
+
     async getItemsAndPrices() {
         return await this.page.locator(locators.itemsAndPrices).allTextContents();
     }
@@ -129,16 +137,22 @@ export class Actions {
             throw error; // Re-throw the error so the test fails
         }
     }
+
+    async assertNameSorting(order: 'asc' | 'desc') {
+        const names = await this.page.locator(locators.sortContainer).allTextContents();
+        const sorted = [...names].sort((a, b) => order === 'asc' ? a.localeCompare(b) : b.localeCompare(a));
+        expect(names).toEqual(sorted);
+    }
 }
 
 
 
-    
-
-    
-
-    
 
 
 
-    
+
+
+
+
+
+

@@ -90,3 +90,10 @@ test('sort High to Low', async ({page}) =>{
   await actions.assertPriceSorting('desc');
   
 } )
+
+test('sort Z to A', async ({page}) => {
+  const actions = new Actions(page);
+  await actions.logIn(standartUser, pass);
+  await actions.sortItemsZtoA();
+  await actions.assertNameSorting('desc');
+});
