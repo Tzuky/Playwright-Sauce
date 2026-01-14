@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { beforeEach } from 'node:test';
 import { Actions } from './actions';
+import { LoginPage } from './login.page';
 
 
 
@@ -33,17 +34,19 @@ test.afterEach(async ({ page }) => {
 test('log into page', async ({ page }) => {
   
 
-  const actions = new Actions(page);
+  const loginPage = new LoginPage(page);
 
-  await actions.logIn(standartUser, pass);
+  await loginPage.logIn(standartUser, pass);
+  const actions = new Actions(page);
   await actions.assertLogoText(logo);
   
 });
 
 test('add item to cart', async ({page}) => {
 
+  const loginPage = new LoginPage(page);
+  await loginPage.logIn(standartUser, pass);
   const actions = new Actions(page);
-  await actions.logIn(standartUser, pass);
   await actions.clickAddToCart();
   await actions.assertCartBadge(badge);
   
@@ -51,8 +54,9 @@ test('add item to cart', async ({page}) => {
 } );
 
 test('finalize an order', async({page}) => {
+  const loginPage = new LoginPage(page);
+  await loginPage.logIn(standartUser, pass);
   const actions = new Actions(page);
-  await actions.logIn(standartUser, pass);
   await actions.clickAddToCart();
   await actions.clickOnCart();
   await actions.clickCheckout();
@@ -66,17 +70,18 @@ test('finalize an order', async({page}) => {
 test('locked out user', async ({ page }) => {
   
 
-  const actions = new Actions(page);
+  const loginPage = new LoginPage(page);
 
-  await actions.logIn(lockedOutUser, pass);
-  await actions.lockedUserLoginError(lockedError);
+  await loginPage.logIn(lockedOutUser, pass);
+  await loginPage.lockedUserLoginError(lockedError);
   
 });
 
 test('sort Low to High', async ({page}) =>{
 
+  const loginPage = new LoginPage(page);
+  await loginPage.logIn(standartUser,pass);
   const actions = new Actions(page);
-  await actions.logIn(standartUser,pass);
   await actions.sortItemsLohi();
   await actions.assertPriceSorting('asc');
   
@@ -84,16 +89,18 @@ test('sort Low to High', async ({page}) =>{
 
 test('sort High to Low', async ({page}) =>{ 
 
+  const loginPage = new LoginPage(page);
+  await loginPage.logIn(standartUser,pass);
   const actions = new Actions(page);
-  await actions.logIn(standartUser,pass);
   await actions.sortItemsHilo();
   await actions.assertPriceSorting('desc');
   
 } )
 
 test('sort Z to A', async ({page}) => {
+  const loginPage = new LoginPage(page);
+  await loginPage.logIn(standartUser, pass);
   const actions = new Actions(page);
-  await actions.logIn(standartUser, pass);
   await actions.sortItemsZtoA();
   await actions.assertNameSorting('desc');
 });

@@ -9,14 +9,6 @@ export class Actions {
       this.page = page;
     }
 
-    async logIn(username: string, password: string) {
-
-    await this.page.locator(locators.userField).fill(username)
-    await this.page.locator(locators.passField).fill(password)
-    await this.page.locator(locators.loginButton).click();
-
-    }
-
     async addAddress(firstName: string, lastName: string, zip: string) {
     await this.page.locator(locators.firstNameField).fill(firstName)
     await this.page.locator(locators.lastNameField).fill(lastName)
@@ -83,20 +75,6 @@ export class Actions {
             throw new Error ('Order Not Completed')
         }
         else console.log('Order Complete Successfully')
-    }
-
-
-    async getErrorText() {
-        return await this.page.locator(locators.lockedOutText).textContent()
-    }
-
-    async lockedUserLoginError(expectedText: string) {
-        const errorText = await this.getErrorText();
-        if (errorText !== expectedText) {
-            throw new Error('Error text incorrect');
-        }
-        else console.log('Error Text Correct')
-
     }
 
     async sortItemsLohi() {

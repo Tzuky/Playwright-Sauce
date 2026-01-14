@@ -3,9 +3,6 @@
 
 export const locators = {
 
-    userField: '#user-name',
-    passField: '#password',
-    loginButton: '#login-button',
     logo: '.app_logo',
     jacketAddToCartButtons:'#add-to-cart-sauce-labs-fleece-jacket',
     shoppingCartBadge: '[data-test="shopping-cart-badge"]',
@@ -17,7 +14,6 @@ export const locators = {
     continueCheckoutButton: '#continue',
     orderFinnishButton: '#finish',
     completeOrderText: '[data-test="complete-header"]',
-    lockedOutText: '[data-test="error"]',
     sortContainer: '[data-test="product-sort-container"]',
     itemsAndPrices: '[data-test="inventory-item-price"]'
     
