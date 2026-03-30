@@ -9,14 +9,6 @@ export class Actions {
       this.page = page;
     }
 
-    async logIn(username: string, password: string) {
-
-    await this.page.locator(locators.userField).fill(username)
-    await this.page.locator(locators.passField).fill(password)
-    await this.page.locator(locators.loginButton).click();
-
-    }
-
     async addAddress(firstName: string, lastName: string, zip: string) {
     await this.page.locator(locators.firstNameField).fill(firstName)
     await this.page.locator(locators.lastNameField).fill(lastName)
@@ -85,6 +77,7 @@ export class Actions {
         else console.log('Order Complete Successfully')
     }
 
+<<<<<<< HEAD
 
     async getErrorText() {
         return await this.page.locator(locators.lockedOutText).textContent()
@@ -103,6 +96,11 @@ async sortItemsFromLowToHigh() {
   const sortContainer = this.page.locator(locators.sortContainer);
   await sortContainer.selectOption({ label: 'Price (low to high)' });
 }
+=======
+    async sortItemsLohi() {
+        await this.page.selectOption(locators.sortContainer, 'lohi');
+    }
+>>>>>>> 79fd9d5b0698ba378a2981db46fba2c5c395b036
 
 async sortItemsFromHighToLow() {
   const sortContainer = this.page.locator(locators.sortContainer);

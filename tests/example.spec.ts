@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { beforeEach } from 'node:test';
 import { Actions } from './actions';
+import { LoginPage } from './login.page';
 
 
 
@@ -33,17 +34,19 @@ test.afterEach(async ({ page }) => {
 test('log into page', async ({ page }) => {
   
 
-  const actions = new Actions(page);
+  const loginPage = new LoginPage(page);
 
-  await actions.logIn(standartUser, pass);
+  await loginPage.logIn(standartUser, pass);
+  const actions = new Actions(page);
   await actions.assertLogoText(logo);
   
 });
 
 test('add item to cart', async ({page}) => {
 
+  const loginPage = new LoginPage(page);
+  await loginPage.logIn(standartUser, pass);
   const actions = new Actions(page);
-  await actions.logIn(standartUser, pass);
   await actions.clickAddToCart();
   await actions.assertCartBadge(badge);
   
@@ -51,8 +54,9 @@ test('add item to cart', async ({page}) => {
 } );
 
 test('finalize an order', async({page}) => {
+  const loginPage = new LoginPage(page);
+  await loginPage.logIn(standartUser, pass);
   const actions = new Actions(page);
-  await actions.logIn(standartUser, pass);
   await actions.clickAddToCart();
   await actions.clickOnCart();
   await actions.clickCheckout();
@@ -66,37 +70,55 @@ test('finalize an order', async({page}) => {
 test('locked out user', async ({ page }) => {
   
 
-  const actions = new Actions(page);
+  const loginPage = new LoginPage(page);
 
-  await actions.logIn(lockedOutUser, pass);
-  await actions.lockedUserLoginError(lockedError);
+  await loginPage.logIn(lockedOutUser, pass);
+  await loginPage.lockedUserLoginError(lockedError);
   
 });
 
 test('sort Low to High', async ({page}) =>{
 
+  const loginPage = new LoginPage(page);
+  await loginPage.logIn(standartUser,pass);
   const actions = new Actions(page);
+<<<<<<< HEAD
   await actions.logIn(standartUser,pass);
   await actions.sortItemsFromLowToHigh();
+=======
+  await actions.sortItemsLohi();
+>>>>>>> 79fd9d5b0698ba378a2981db46fba2c5c395b036
   await actions.assertPriceSorting('asc');
   
 } )
 
 test('sort High to Low', async ({page}) =>{ 
 
+  const loginPage = new LoginPage(page);
+  await loginPage.logIn(standartUser,pass);
   const actions = new Actions(page);
+<<<<<<< HEAD
   await actions.logIn(standartUser,pass);
   await actions.sortItemsFromHighToLow();
+=======
+  await actions.sortItemsHilo();
+>>>>>>> 79fd9d5b0698ba378a2981db46fba2c5c395b036
   await actions.assertPriceSorting('desc');
   
 } )
 
 test('sort Z to A', async ({page}) => {
+  const loginPage = new LoginPage(page);
+  await loginPage.logIn(standartUser, pass);
   const actions = new Actions(page);
+<<<<<<< HEAD
   await actions.logIn(standartUser, pass);
   await actions.sortItemsByZA();
 // Add a new test to check the sort order from Z to A and back to A to Z
 await actions.sortItemsByAZ();
 await actions.assertNameSorting('asc');
+=======
+  await actions.sortItemsZtoA();
+>>>>>>> 79fd9d5b0698ba378a2981db46fba2c5c395b036
   await actions.assertNameSorting('desc');
 });
