@@ -77,7 +77,7 @@ test('sort Low to High', async ({page}) =>{
 
   const actions = new Actions(page);
   await actions.logIn(standartUser,pass);
-  await actions.sortItemsLohi();
+  await actions.sortItemsFromLowToHigh();
   await actions.assertPriceSorting('asc');
   
 } )
@@ -86,7 +86,7 @@ test('sort High to Low', async ({page}) =>{
 
   const actions = new Actions(page);
   await actions.logIn(standartUser,pass);
-  await actions.sortItemsHilo();
+  await actions.sortItemsFromHighToLow();
   await actions.assertPriceSorting('desc');
   
 } )
@@ -94,6 +94,9 @@ test('sort High to Low', async ({page}) =>{
 test('sort Z to A', async ({page}) => {
   const actions = new Actions(page);
   await actions.logIn(standartUser, pass);
-  await actions.sortItemsZtoA();
+  await actions.sortItemsByZA();
+// Add a new test to check the sort order from Z to A and back to A to Z
+await actions.sortItemsByAZ();
+await actions.assertNameSorting('asc');
   await actions.assertNameSorting('desc');
 });

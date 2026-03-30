@@ -99,21 +99,25 @@ export class Actions {
 
     }
 
-    async sortItemsLohi() {
-        await this.page.selectOption(locators.sortContainer, 'lohi');
-    }
+async sortItemsFromLowToHigh() {
+  const sortContainer = this.page.locator(locators.sortContainer);
+  await sortContainer.selectOption({ label: 'Price (low to high)' });
+}
 
-    async sortItemsHilo() {
-        await this.page.selectOption(locators.sortContainer, 'hilo');
-    }
+async sortItemsFromHighToLow() {
+  const sortContainer = this.page.locator(locators.sortContainer);
+  await sortContainer.selectOption({ label: 'Price (high to low)' });
+}
 
-    async sortItemsAtoZ() {
-        await this.page.selectOption(locators.sortContainer, 'az');
-    }
+async sortItemsByAZ() {
+  const sortContainer = this.page.locator(locators.sortContainer);
+  await sortContainer.selectOption({ label: 'Name (A to Z)' });
+}
 
-    async sortItemsZtoA() {
-        await this.page.selectOption(locators.sortContainer, 'za');
-    }
+async sortItemsByZA() {
+  const sortContainer = this.page.locator(locators.sortContainer);
+  await sortContainer.selectOption({ label: 'Name (Z to A)' });
+}
 
     async getItemsAndPrices() {
         return await this.page.locator(locators.itemsAndPrices).allTextContents();
