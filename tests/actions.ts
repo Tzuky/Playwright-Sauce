@@ -66,10 +66,6 @@ export class Actions {
     expect(headerText).toBe(expectHeaderText);
   }
 
-  async sortItemsLohi() {
-    await this.page.selectOption(locators.sortContainer, 'lohi');
-  }
-
   async getErrorText() {
     return await this.page.locator(locators.lockedOutText).textContent();
   }
